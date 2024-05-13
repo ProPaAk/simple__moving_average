@@ -4,9 +4,7 @@
 #include <cstdlib>      // std::rand
 #include <chrono>       // std::chrono::seconds
 #include <numeric>      // std::accumulate
-#include <exception>   // std::exception
-
-#include <typeinfo>
+#include <exception>    // std::exception
 
 constexpr std::uint32_t LEN = 1000000u;
 constexpr std::array<std::uint8_t, 6> screens = { 4u, 8u, 16u, 32u, 64u, 128u };
@@ -66,9 +64,6 @@ void PrettyPrintResult(const std::vector<FP>& average,
 
 int main() {
     try {
-        // std::vector<float> average;
-        // average.reserve(LEN);
-        // std::cout << std::to_string(average.capacity());
         // Setup data for test
         std::srand(std::time(nullptr));
         auto inputFloatData = GenInputData<float>();
