@@ -29,10 +29,14 @@ std::vector<FP> CalcMovingAverage(const std::vector<FP>& values, std::uint8_t sc
     std::vector<FP> average;
     average.reserve(values.size() - screen);
 
+    // calc first sum, that allow to use the recurrent formula
     auto iter = std::next(values.begin(), screen);
+    auto sum = std::accumulate(std::next(iter, -(screen)), iter, 0.0);
+    average.emplace_back(sum / screen);
+
     for(; iter != values.end(); iter++) {
-        auto sum = std::accumulate(std::next(iter, -(screen)), iter, 0.0);
-        average.emplace_back(sum / screen);
+        sum = average.back() + ((*iter - *std::next(iter, (-screen))) / screen);
+        average.emplace_back(sum);
     }
 
     return average; // NRVO
